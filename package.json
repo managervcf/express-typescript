@@ -4,6 +4,7 @@
   "description": "Boilerplate REST API built using Express and TypeScript",
   "main": "index.js",
   "scripts": {
+    "start": "node build/index.js",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "predev": "npm run swagger",
     "prebuild": "npm run swagger",
