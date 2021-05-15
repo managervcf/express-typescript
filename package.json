@@ -1,0 +1,27 @@
+{
+  "name": "express-typescript",
+  "version": "1.0.0",
+  "description": "Boilerplate REST API built using Express and TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/managervcf/express-typescript.git"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "typescript",
+    "express",
+    "nodejs",
+    "postgresql"
+  ],
+  "author": "Mateusz Pyzowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/managervcf/express-typescript/issues"
+  },
+  "homepage": "https://github.com/managervcf/express-typescript#readme"
+}
