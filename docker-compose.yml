@@ -1,12 +1,26 @@
 version: "3"
 services:
+  db:
+    container_name: database
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_DB=express-typescript-db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
   app:
-    container_name: Server
+    container_name: server
     build:
       context: .
       dockerfile: Dockerfile.dev
-    # Map the /src folder into the /app/src inside the docker container
     volumes:
+      # Map the /src folder into the /app/src inside the docker container
       - ./src:/app/src
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_DB=express-typescript-db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db

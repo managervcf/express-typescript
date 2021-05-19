@@ -1,8 +1,7 @@
-# Multi-stage build.
+# Production environment Dockerfile performing a multi-stage build.
 # 1. Build the JavaScript code from the TypeScript files.
-# 2. Copy generates files from the builder stage to the server stage.
+# 2. Copy generated files from the builder stage to the server stage.
 #    Install only --production dependencies.
-
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
