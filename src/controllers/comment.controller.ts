@@ -1,29 +1,37 @@
-import { Get, Route, Tags, Post, Body, Path } from 'tsoa';
-import { CommentRepository, commentRepository } from '../repositories/';
-import { Comment } from '../models';
-import { CreateCommentDto } from '../types/interfaces';
+import { Request, Response } from 'express';
+import { CommentService, commentService } from '../services';
 
-@Route('comments')
-@Tags('Comment')
 class CommentController {
-  constructor(private commentRepository: CommentRepository) {}
+  constructor(private commentService: CommentService) {}
 
-  @Get('/')
-  public async getComments(): Promise<Comment[]> {
-    return this.commentRepository.getComments();
-  }
+  public getComments = async (
+    _req: Request,
+    res: Response
+  ): Promise<Response<Comment[]>> => {
+    const comments = await this.commentService.getComments();
+    return res.send(comments);
+  };
 
-  @Post('/')
-  public async createComment(
-    @Body() createCommentDto: CreateCommentDto
-  ): Promise<Comment> {
-    return this.commentRepository.createComment(createCommentDto);
-  }
+  public createComment = async (
+    req: Request,
+    res: Response
+  ): Promise<Response<Comment>> => {
+    const newComment = await this.commentService.createComment(req.body);
+    return res.send(newComment);
+  };
 
-  @Get('/:id')
-  public async getComment(@Path() id: string): Promise<Comment | null> {
-    return this.commentRepository.getComment(Number(id));
-  }
+  public getComment = async (
+    req: Request,
+    res: Response
+  ): Promise<Response<Comment | null>> => {
+    const comment = await this.commentService.getComment(req.params.id);
+
+    if (!comment) {
+      return res.status(404).send({ message: 'No comment found' });
+    }
+
+    return res.send(comment);
+  };
 }
 
-export const commentController = new CommentController(commentRepository);
+export const commentController = new CommentController(commentService);

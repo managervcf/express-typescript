@@ -3,7 +3,7 @@ import express, { Application } from 'express';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import { createConnection } from 'typeorm';
-import { router } from './routes';
+import { apiRouter } from './routes';
 import { config } from './config';
 
 const app: Application = express();
@@ -21,7 +21,7 @@ app.use(
   })
 );
 
-app.use(router);
+app.use('/api', apiRouter);
 
 async function start() {
   try {

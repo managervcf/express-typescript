@@ -1,27 +1,38 @@
-import { Get, Route, Tags, Post, Body, Path } from 'tsoa';
-import { userRepository, UserRepository } from '../repositories';
+import { Request, Response } from 'express';
 import { User } from '../models';
-import { CreateUserDto } from '../types/interfaces';
+import { UserService, userService } from '../services';
 
-@Route('users')
-@Tags('User')
 class UserController {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userService: UserService) {}
 
-  @Get('/')
-  public async getUsers(): Promise<User[]> {
-    return this.userRepository.getUsers();
-  }
+  public getUsers = async (
+    _req: Request,
+    res: Response
+  ): Promise<Response<User[]>> => {
+    const users = await this.userService.getUsers();
+    return res.send(users);
+  };
 
-  @Post('/')
-  public async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.userRepository.createUser(createUserDto);
-  }
+  public createUser = async (
+    req: Request,
+    res: Response
+  ): Promise<Response<User>> => {
+    const newUser = await this.userService.createUser(req.body);
+    return res.send(newUser);
+  };
 
-  @Get('/:id')
-  public async getUser(@Path() id: string): Promise<User | null> {
-    return this.userRepository.getUser(Number(id));
-  }
+  public getUser = async (
+    req: Request,
+    res: Response
+  ): Promise<Response<User | null>> => {
+    const user = await this.userService.getUser(req.params.id);
+
+    if (!user) {
+      return res.status(404).send({ message: 'No user found' });
+    }
+
+    return res.send(user);
+  };
 }
 
-export const userController = new UserController(userRepository);
+export const userController = new UserController(userService);

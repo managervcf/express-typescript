@@ -3,10 +3,10 @@ import { commentRouter } from './comment.router';
 import { postRouter } from './post.router';
 import { userRouter } from './user.router';
 
-const router = Router();
+const apiRouter = Router();
 
-router.use('/users', commentRouter);
-router.use('/users', postRouter);
-router.use('/users', userRouter);
+apiRouter.use('/comments', commentRouter);
+apiRouter.use('/posts', postRouter);
+apiRouter.use('/users', userRouter);
 
-export { router };
+export { apiRouter };

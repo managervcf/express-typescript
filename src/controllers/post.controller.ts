@@ -1,27 +1,38 @@
-import { Get, Route, Tags, Post as PostMethod, Body, Path } from 'tsoa';
-import { PostRepository, postRepository } from '../repositories';
+import { Request, Response } from 'express';
 import { Post } from '../models';
-import { CreatePostDto } from '../types/interfaces';
+import { PostService, postService } from '../services';
 
-@Route('posts')
-@Tags('Post')
 class PostController {
-  constructor(private postRepository: PostRepository) {}
+  constructor(private postService: PostService) {}
 
-  @Get('/')
-  public async getPosts(): Promise<Post[]> {
-    return this.postRepository.getPosts();
-  }
+  public getPosts = async (
+    _req: Request,
+    res: Response
+  ): Promise<Response<Post[]>> => {
+    const posts = await this.postService.getPosts();
+    return res.send(posts);
+  };
 
-  @PostMethod('/')
-  public async createPost(@Body() createPostDto: CreatePostDto): Promise<Post> {
-    return this.postRepository.createPost(createPostDto);
-  }
+  public createPost = async (
+    req: Request,
+    res: Response
+  ): Promise<Response<Post>> => {
+    const newPost = await this.postService.createPost(req.body);
+    return res.send(newPost);
+  };
 
-  @Get('/:id')
-  public async getPost(@Path() id: string): Promise<Post | null> {
-    return this.postRepository.getPost(Number(id));
-  }
+  public getPost = async (
+    req: Request,
+    res: Response
+  ): Promise<Response<Post | null>> => {
+    const post = await this.postService.getPost(req.params.id);
+
+    if (!post) {
+      return res.status(404).send({ message: 'No post found' });
+    }
+
+    return res.send(post);
+  };
 }
 
-export const postController = new PostController(postRepository);
+export const postController = new PostController(postService);
