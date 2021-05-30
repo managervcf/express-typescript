@@ -11,7 +11,7 @@ services:
     container_name: server
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
       # Map the /src folder into the /app/src inside the docker container
       - ./src:/app/src
@@ -19,8 +19,5 @@ services:
       - '8000:8000'
     depends_on:
       - db
-    environment:
-      - POSTGRES_DB=express-typescript-db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=db
+    env_file:
+      - .env

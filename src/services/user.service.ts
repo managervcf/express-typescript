@@ -1,9 +1,9 @@
 import { Get, Route, Tags, Post, Body, Path } from 'tsoa';
 import { userRepository, UserRepository } from '../repositories';
-import { User } from '../models';
-import { CreateUserDto } from '../types/interfaces';
+import { User } from '../entities';
+import { CreateUserDto } from '../types';
 
-@Route('users')
+@Route('/api/users')
 @Tags('User')
 export class UserService {
   constructor(private userRepository: UserRepository) {}

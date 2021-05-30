@@ -1,3 +1,4 @@
-export * from './comment.controller';
-export * from './post.controller';
+export * from './auth.controller';
+export * from './recipe.controller';
+export * from './upload.controller';
 export * from './user.controller';

@@ -1,13 +1,10 @@
 import express from 'express';
 import { userController } from '../controllers';
+import { isAuthorized } from '../middleware';
 
-const userRouter = express.Router();
+// Create and export a router.
+export const userRouter = express.Router();
 
-userRouter
-  .route('/')
-  .get(userController.getUsers)
-  .post(userController.createUser);
-
-userRouter.route('/:id').get(userController.getUser);
-
-export { userRouter };
+// Define all routes and methods, add middlewares and route handlers.
+userRouter.route('/').get(isAuthorized, userController.getUsers);
+userRouter.route('/:id').get(isAuthorized, userController.getUser);

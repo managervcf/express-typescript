@@ -1,12 +1,14 @@
 import { Router } from 'express';
-import { commentRouter } from './comment.router';
-import { postRouter } from './post.router';
+import { authRouter } from './auth.router';
+import { recipeRouter } from './recipe.router';
+import { uploadRouter } from './upload.router';
 import { userRouter } from './user.router';
 
-const apiRouter = Router();
+// Create and export a router.
+export const apiRouter = Router();
 
-apiRouter.use('/comments', commentRouter);
-apiRouter.use('/posts', postRouter);
+// Assign all routers to specific routes.
+apiRouter.use('/auth', authRouter);
+apiRouter.use('/recipes', recipeRouter);
+apiRouter.use('/upload', uploadRouter);
 apiRouter.use('/users', userRouter);
-
-export { apiRouter };

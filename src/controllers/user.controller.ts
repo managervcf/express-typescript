@@ -1,10 +1,13 @@
 import { Request, Response } from 'express';
-import { User } from '../models';
+import { User } from '../entities';
 import { UserService, userService } from '../services';
 
 class UserController {
   constructor(private userService: UserService) {}
 
+  /**
+   * Retrieves all users.
+   */
   public getUsers = async (
     _req: Request,
     res: Response
@@ -13,14 +16,9 @@ class UserController {
     return res.send(users);
   };
 
-  public createUser = async (
-    req: Request,
-    res: Response
-  ): Promise<Response<User>> => {
-    const newUser = await this.userService.createUser(req.body);
-    return res.send(newUser);
-  };
-
+  /**
+   * Retrieves a specific user.
+   */
   public getUser = async (
     req: Request,
     res: Response
