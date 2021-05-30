@@ -1,7 +1,6 @@
 import { Body, Post, Route, Tags } from 'tsoa';
 import { config } from '../config';
-import { GetUploadUrlResult } from '../types';
-import { GetPresignedUrlArgs } from '../types/interfaces/get-presigned-url-args.interface';
+import { IGetUploadUrlResult, IGetPresignedUrlArgs } from '../types';
 import { getUploadUrl } from '../utils';
 
 @Route('/api/upload')
@@ -9,8 +8,8 @@ import { getUploadUrl } from '../utils';
 export class UploadService {
   @Post('/')
   public async getPresignedUrl(
-    @Body() { type, size }: GetPresignedUrlArgs
-  ): Promise<GetUploadUrlResult> {
+    @Body() { type, size }: IGetPresignedUrlArgs
+  ): Promise<IGetUploadUrlResult> {
     if (!type || !size) {
       throw new Error('Must upload a file');
     }

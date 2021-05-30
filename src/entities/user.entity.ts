@@ -6,9 +6,9 @@ import {
   Unique,
 } from 'typeorm';
 import { hashSync, compareSync } from 'bcrypt';
-import { Recipe } from './recipe.entity';
+import { Recipe } from './';
 import { config } from '../config';
-import { UserRoles } from '../types/enums/user-roles.enum';
+import { UserRoles } from '../types';
 
 @Entity()
 @Unique(['email'])

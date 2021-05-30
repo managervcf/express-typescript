@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { Recipe } from '../entities';
 import { RecipeService, recipeService } from '../services';
-import { ICurrentUser } from '../types';
 
 class RecipeController {
   constructor(private recipeService: RecipeService) {}

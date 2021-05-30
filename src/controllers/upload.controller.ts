@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { UploadService, uploadService } from '../services';
-import { GetUploadUrlResult } from '../types';
+import { IGetUploadUrlResult } from '../types';
 
 class UploadController {
   constructor(private uploadService: UploadService) {}
@@ -11,7 +11,7 @@ class UploadController {
   public getPresignedUrl = async (
     req: Request,
     res: Response
-  ): Promise<Response<GetUploadUrlResult>> => {
+  ): Promise<Response<IGetUploadUrlResult>> => {
     const url = await this.uploadService.getPresignedUrl(req.body);
     return res.send(url);
   };

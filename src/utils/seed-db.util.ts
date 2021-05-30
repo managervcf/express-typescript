@@ -1,5 +1,5 @@
 import { recipeService, userService } from '../services';
-import { CreateRecipeDto, CreateUserDto } from '../types';
+import { ICreateRecipeDto, ICreateUserDto } from '../types';
 
 /**
  * Seed the database with dummy data.
@@ -8,13 +8,13 @@ export async function seedDb() {
   /**
    * Example data.
    */
-  const user: CreateUserDto = {
+  const user: ICreateUserDto = {
     email: 'john@doe.com',
     password: '1234',
     adminSecret: 'super-secret-admin',
   };
 
-  const recipe1: CreateRecipeDto = {
+  const recipe1: ICreateRecipeDto = {
     name: 'Potato salad',
     description: 'This is the best salad ever',
     instructions: 'Instructions so instructive, wow',
@@ -40,7 +40,7 @@ export async function seedDb() {
     ],
   };
 
-  const recipe2: CreateRecipeDto = {
+  const recipe2: ICreateRecipeDto = {
     name: 'Oatmeal',
     description: 'This is the best oatmeal ever',
     instructions: 'Instructions so instructive, wow',

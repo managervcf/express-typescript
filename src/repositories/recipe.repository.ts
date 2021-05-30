@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 import { Ingredient, Recipe, RecipeIngredient, Unit, User } from '../entities';
-import { CreateRecipeDto, IIngredient, UpdateRecipeDto } from '../types';
+import { ICreateRecipeDto, IUpdateRecipeDto } from '../types';
 
 export class RecipeRepository {
   /**
@@ -19,7 +19,7 @@ export class RecipeRepository {
    * Creates a new recipe.
    */
   public async createRecipe(
-    createRecipeDto: CreateRecipeDto,
+    createRecipeDto: ICreateRecipeDto,
     userId: number
   ): Promise<Recipe> {
     const newIngredient = new Ingredient();
@@ -79,7 +79,7 @@ export class RecipeRepository {
    */
   public async updateRecipe(
     id: number,
-    updateRecipeDto: UpdateRecipeDto
+    updateRecipeDto: IUpdateRecipeDto
   ): Promise<Recipe | null> {
     const newIngredient = new Ingredient();
     const newRecipeIngredient = new RecipeIngredient();

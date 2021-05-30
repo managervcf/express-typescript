@@ -7,7 +7,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from './';
-import { RecipeIngredient } from './recipe-ingredient.entity';
+import { RecipeIngredient } from './';
 
 @Entity()
 export class Recipe {

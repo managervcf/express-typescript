@@ -1,7 +1,7 @@
 import { Get, Route, Tags, Post, Body, Path } from 'tsoa';
 import { userRepository, UserRepository } from '../repositories';
 import { User } from '../entities';
-import { CreateUserDto } from '../types';
+import { ICreateUserDto } from '../types';
 
 @Route('/api/users')
 @Tags('User')
@@ -14,7 +14,9 @@ export class UserService {
   }
 
   @Post('/')
-  public async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+  public async createUser(
+    @Body() createUserDto: ICreateUserDto
+  ): Promise<User> {
     return this.userRepository.createUser(createUserDto);
   }
 

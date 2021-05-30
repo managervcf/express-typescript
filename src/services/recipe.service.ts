@@ -1,7 +1,7 @@
 import { Get, Route, Tags, Post, Body, Path, Delete, Patch } from 'tsoa';
 import { RecipeRepository, recipeRepository } from '../repositories';
 import { Recipe } from '../entities';
-import { CreateRecipeDto, ICurrentUser, UpdateRecipeDto } from '../types';
+import { ICreateRecipeDto, ICurrentUser, IUpdateRecipeDto } from '../types';
 
 @Route('/api/recipes')
 @Tags('Recipe')
@@ -20,7 +20,7 @@ export class RecipeService {
       createRecipeDto,
       currentUser,
     }: {
-      createRecipeDto: CreateRecipeDto;
+      createRecipeDto: ICreateRecipeDto;
       currentUser: ICurrentUser;
     }
   ): Promise<Recipe> {
@@ -35,7 +35,7 @@ export class RecipeService {
   @Patch('/:id')
   public async updateRecipe(
     @Path() id: string,
-    @Body() updateRecipeDto: UpdateRecipeDto
+    @Body() updateRecipeDto: IUpdateRecipeDto
   ): Promise<Recipe | null> {
     return this.recipeRepository.updateRecipe(Number(id), updateRecipeDto);
   }

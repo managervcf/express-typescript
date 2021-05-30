@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm';
 import { User } from '../entities';
 import { createToken, verifyToken } from '../middleware';
 import { UserRepository, userRepository } from '../repositories';
-import { CreateUserDto, ICurrentUser, IToken, LoginUserDto } from '../types';
+import { ICreateUserDto, ICurrentUser, IToken, ILoginUserDto } from '../types';
 
 @Route('/api/auth')
 @Tags('Auth')
@@ -12,7 +12,7 @@ export class AuthService {
 
   @Post('/register')
   public async registerUser(
-    @Body() createUserDto: CreateUserDto
+    @Body() createUserDto: ICreateUserDto
   ): Promise<IToken> {
     const { id, email, role } = await this.userRepository.createUser(
       createUserDto
@@ -25,7 +25,7 @@ export class AuthService {
 
   @Post('/login')
   public async loginUser(
-    @Body() { email, password }: LoginUserDto
+    @Body() { email, password }: ILoginUserDto
   ): Promise<IToken | null> {
     const foundUser = await this.userRepository.getUserByEmail(email, true);
 

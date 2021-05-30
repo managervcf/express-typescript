@@ -1,4 +1,4 @@
-export interface CreateRecipeDto {
+export interface ICreateRecipeDto {
   name: string;
   description: string;
   instructions: string;
@@ -6,6 +6,8 @@ export interface CreateRecipeDto {
   preparationTime: number;
   ingredients: IIngredient[];
 }
+
+export interface IUpdateRecipeDto extends ICreateRecipeDto {}
 
 export interface IIngredient {
   name: string;

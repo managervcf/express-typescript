@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import { config } from '../config';
 import { User } from '../entities';
-import { CreateUserDto, UserRoles } from '../types';
+import { ICreateUserDto, UserRoles } from '../types';
 
 export class UserRepository {
   /**
@@ -20,7 +20,7 @@ export class UserRepository {
     email,
     password,
     adminSecret,
-  }: CreateUserDto): Promise<User> {
+  }: ICreateUserDto): Promise<User> {
     const user = new User();
     user.email = email;
     user.password = password;

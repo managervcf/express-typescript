@@ -1,7 +1,7 @@
 import { S3 } from 'aws-sdk';
 import { v1 as uuid } from 'uuid';
 import { config } from '../config';
-import { GetUploadUrlResult } from '../types';
+import { IGetUploadUrlResult } from '../types';
 
 /**
  * Create a new S3 instance.
@@ -32,7 +32,7 @@ function generateAWSKey(folderName?: string) {
  * 5. Print out a log to the console.
  * 6. Return the url.
  */
-export async function getUploadUrl(): Promise<GetUploadUrlResult> {
+export async function getUploadUrl(): Promise<IGetUploadUrlResult> {
   const operationName = 'putObject';
   const key = generateAWSKey(config.awsS3.folderName);
   const params = {
