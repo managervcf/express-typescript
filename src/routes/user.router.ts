@@ -1,6 +1,6 @@
 import express from 'express';
 import { userController } from '../controllers';
-import { isAuthorized } from '../middleware';
+import { isAuthorized } from '../middlewares';
 
 // Create and export a router.
 export const userRouter = express.Router();

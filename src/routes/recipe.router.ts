@@ -1,6 +1,6 @@
 import express from 'express';
 import { recipeController } from '../controllers';
-import { isAuthenticated, isAuthorized } from '../middleware';
+import { isAuthenticated, isAuthorized } from '../middlewares';
 
 // Create and export a router.
 export const recipeRouter = express.Router();

@@ -1,7 +1,7 @@
 import { Get, Route, Tags, Post, Body, Header } from 'tsoa';
 import { getRepository } from 'typeorm';
 import { User } from '../entities';
-import { createToken, verifyToken } from '../middleware';
+import { createToken, verifyToken } from '../middlewares';
 import { UserRepository, userRepository } from '../repositories';
 import { ICreateUserDto, ICurrentUser, IToken, ILoginUserDto } from '../types';
 

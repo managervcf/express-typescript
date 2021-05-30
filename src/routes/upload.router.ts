@@ -1,6 +1,6 @@
 import express from 'express';
 import { uploadController } from '../controllers';
-import { isAuthenticated } from '../middleware';
+import { isAuthenticated } from '../middlewares';
 
 // Create and export a router.
 export const uploadRouter = express.Router();
