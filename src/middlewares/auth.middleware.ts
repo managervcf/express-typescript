@@ -94,9 +94,8 @@ export function isAuthenticated(
 
   if (!user) {
     return res.send({ message: 'Not authenticated' });
+  } else {
+    req.body.currentUser = user;
+    next();
   }
-
-  req.body.currentUser = user;
-
-  next();
 }

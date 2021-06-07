@@ -1,6 +1,7 @@
 import express from 'express';
 import { recipeController } from '../controllers';
-import { isAuthenticated, isAuthorized } from '../middlewares';
+import { isAuthenticated, isAuthorized, validate } from '../middlewares';
+import { recipeValidationSchema } from '../types';
 
 // Create and export a router.
 export const recipeRouter = express.Router();
@@ -9,9 +10,17 @@ export const recipeRouter = express.Router();
 recipeRouter
   .route('/')
   .get(isAuthenticated, recipeController.getRecipes)
-  .post(isAuthenticated, recipeController.createRecipe);
+  .post(
+    validate(recipeValidationSchema),
+    isAuthenticated,
+    recipeController.createRecipe
+  );
 recipeRouter
   .route('/:id')
   .get(isAuthenticated, recipeController.getRecipe)
-  .patch(isAuthorized, recipeController.updateRecipe)
+  .patch(
+    validate(recipeValidationSchema),
+    isAuthorized,
+    recipeController.updateRecipe
+  )
   .delete(isAuthorized, recipeController.deleteRecipe);
