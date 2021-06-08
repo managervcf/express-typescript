@@ -1,7 +1,7 @@
 import express from 'express';
+import { config } from '../config';
 import { recipeController } from '../controllers';
 import { isAuthenticated, isAuthorized, validate } from '../middlewares';
-import { recipeValidationSchema } from '../types';
 
 // Create and export a router.
 export const recipeRouter = express.Router();
@@ -11,7 +11,7 @@ recipeRouter
   .route('/')
   .get(isAuthenticated, recipeController.getRecipes)
   .post(
-    validate(recipeValidationSchema),
+    validate(config.recipeValidationSchema),
     isAuthenticated,
     recipeController.createRecipe
   );
@@ -19,7 +19,7 @@ recipeRouter
   .route('/:id')
   .get(isAuthenticated, recipeController.getRecipe)
   .patch(
-    validate(recipeValidationSchema),
+    validate(config.recipeValidationSchema),
     isAuthorized,
     recipeController.updateRecipe
   )

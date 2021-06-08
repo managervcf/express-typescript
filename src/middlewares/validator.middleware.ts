@@ -1,6 +1,6 @@
-import { DataValidator } from 'body-validator';
 import { NextFunction, Request, Response } from 'express';
-import { IValidatable } from '../types';
+import { DataValidator } from 'body-validator';
+import { IValidationSchema } from '../types';
 
 /**
  * Validates the body based on the provided schema.
@@ -8,7 +8,7 @@ import { IValidatable } from '../types';
  * 2. Validate the request body.
  * 3. Check if there body is valid and proceed to the next middleware.
  */
-export function validate({ schema }: IValidatable) {
+export function validate({ schema }: IValidationSchema) {
   return (req: Request, res: Response, next: NextFunction) => {
     const validation = new DataValidator(schema, req.body);
 

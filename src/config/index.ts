@@ -1,4 +1,6 @@
+import { FieldType, StringType } from 'body-validator';
 import { ConnectionOptions } from 'typeorm';
+import { IValidationSchema } from '../types';
 
 enum EnvironmentVariables {
   ADMIN_SECRET = 'ADMIN_SECRET',
@@ -96,6 +98,34 @@ class Config {
     database: process.env[this.envVariables.POSTGRES_DB]!,
     synchronize: true,
     entities: ['src/entities/**/*.ts'],
+  };
+
+  /**
+   * Validation schemas.
+   */
+  readonly userValidationSchema: IValidationSchema = {
+    schema: [
+      { name: 'email', required: true, stringType: StringType.Email },
+      { name: 'password', required: true, minlength: 4, maxlength: 20 },
+      { name: 'adminSecret', required: false },
+    ],
+  };
+
+  readonly recipeValidationSchema: IValidationSchema = {
+    schema: [
+      { name: 'name', required: true },
+      { name: 'description', required: false },
+      { name: 'instructions', required: false },
+      { name: 'url', required: true },
+      { name: 'preparationTime', required: true },
+      {
+        name: 'ingredients',
+        required: true,
+        type: FieldType.List,
+        minlength: 1,
+        maxlength: 50,
+      },
+    ],
   };
 }
 
