@@ -27,6 +27,7 @@ class RecipeController {
       createRecipeDto: req.body,
       currentUser: req.body.currentUser,
     });
+
     return res.send(newRecipe);
   };
 
@@ -41,9 +42,9 @@ class RecipeController {
 
     if (!recipe) {
       return res.status(404).send({ message: 'No recipe found' });
+    } else {
+      return res.send(recipe);
     }
-
-    return res.send(recipe);
   };
 
   /**
@@ -60,9 +61,9 @@ class RecipeController {
 
     if (!recipe) {
       return res.status(404).send({ message: 'No recipe found' });
+    } else {
+      return res.send(recipe);
     }
-
-    return res.send(recipe);
   };
 
   /**

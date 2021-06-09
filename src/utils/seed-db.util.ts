@@ -64,11 +64,13 @@ export async function seedDb() {
    * Seed the database with 1 user and 2 recipes.
    */
   const createdUser = await userService.createUser(user);
-  const createdRecipe1 = await recipeService.createRecipe({
+
+  await recipeService.createRecipe({
     createRecipeDto: recipe1,
     currentUser: createdUser,
   });
-  const createdRecipe2 = await recipeService.createRecipe({
+
+  await recipeService.createRecipe({
     createRecipeDto: recipe2,
     currentUser: createdUser,
   });

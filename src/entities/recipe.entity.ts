@@ -6,8 +6,7 @@ import {
   OneToMany,
   JoinColumn,
 } from 'typeorm';
-import { User } from './';
-import { RecipeIngredient } from './';
+import { User, Ingredient } from './';
 
 @Entity()
 export class Recipe {
@@ -33,15 +32,11 @@ export class Recipe {
   @JoinColumn({ name: 'user_id' })
   user!: User;
 
-  @OneToMany(
-    _type => RecipeIngredient,
-    recipeIngredient => recipeIngredient.recipe,
-    {
-      eager: true,
-      cascade: true,
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    }
-  )
-  recipeIngredients!: RecipeIngredient[];
+  @OneToMany(_type => Ingredient, ingredient => ingredient.recipe, {
+    eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  ingredients!: Ingredient[];
 }

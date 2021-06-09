@@ -51,7 +51,7 @@ export async function isAuthorized(
   if (!user) {
     return res.send({ message: 'Not authorized' });
   } else if (UserRoles.Admin) {
-    next();
+    return next();
   }
 
   const foundRecipe = await recipeRepository.getRecipe(Number(req.params.id));
@@ -61,10 +61,10 @@ export async function isAuthorized(
   }
 
   if (foundRecipe.user.email !== user.email) {
-    next();
+    return res.send({ message: 'Not a recipe owner' });
   }
 
-  return res.send({ message: 'Not a recipe owner' });
+  return next();
 }
 
 /**
@@ -96,6 +96,6 @@ export function isAuthenticated(
     return res.send({ message: 'Not authenticated' });
   } else {
     req.body.currentUser = user;
-    next();
+    return next();
   }
 }

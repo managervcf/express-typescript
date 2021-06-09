@@ -9,6 +9,8 @@ export class UserRepository {
    */
   public async getUsers(): Promise<User[]> {
     const users = await getRepository(User).find();
+    console.dir('Found all users ------>', { colors: true });
+    console.dir(users, { depth: Infinity, colors: true });
 
     return users;
   }
@@ -31,6 +33,8 @@ export class UserRepository {
     let savedUser = null;
     try {
       savedUser = await getRepository(User).save(user);
+      console.dir('Created user ------>', { colors: true });
+      console.dir(savedUser, { depth: Infinity, colors: true });
     } catch (error) {
       console.log(error);
       throw new Error('User cannot be created');
@@ -44,6 +48,8 @@ export class UserRepository {
    */
   public async getUser(id: number): Promise<User | null> {
     const user = await getRepository(User).findOne({ id });
+    console.dir(`Found user by id '${id}' ------>`, { colors: true });
+    console.dir(user, { depth: Infinity, colors: true });
 
     return user ?? null;
   }
@@ -65,6 +71,8 @@ export class UserRepository {
         .getOne();
     } else {
       user = await getRepository(User).findOne({ email });
+      console.dir(`Found user by email '${email}' ------>`, { colors: true });
+      console.dir(user, { depth: Infinity, colors: true });
     }
 
     return user ?? null;
