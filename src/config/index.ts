@@ -9,12 +9,9 @@ enum EnvironmentVariables {
   AWS_S3_FOLDER_NAME = 'AWS_S3_FOLDER_NAME',
   AWS_S3_SECRET_ACCESS_KEY = 'AWS_S3_SECRET_ACCESS_KEY',
   JWT_SECRET = 'JWT_SECRET',
-  PORT = 'PORT',
   POSTGRES_DB = 'POSTGRES_DB',
-  POSTGRES_HOST = 'POSTGRES_HOST',
-  POSTGRES_PASSWORD = 'POSTGRES_PASSWORD',
-  POSTGRES_PORT = 'POSTGRES_PORT',
   POSTGRES_USER = 'POSTGRES_USER',
+  POSTGRES_PASSWORD = 'POSTGRES_PASSWORD',
 }
 
 /**
@@ -84,15 +81,15 @@ class Config {
   /**
    * Default application port.
    */
-  readonly port = process.env[this.envVariables.PORT]!;
+  readonly port = 8000;
 
   /**
    * Database connection options.
    */
   readonly db: ConnectionOptions = {
     type: 'postgres',
-    host: process.env[this.envVariables.POSTGRES_HOST]!,
-    port: +process.env[this.envVariables.POSTGRES_PORT]!,
+    host: 'db',
+    port: 5432,
     username: process.env[this.envVariables.POSTGRES_USER]!,
     password: process.env[this.envVariables.POSTGRES_PASSWORD]!,
     database: process.env[this.envVariables.POSTGRES_DB]!,
