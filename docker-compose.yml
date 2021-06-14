@@ -3,6 +3,8 @@ services:
   db:
     container_name: database
     image: postgres:13-alpine
+    env_file:
+      - .env
   app:
     container_name: server
     build:
