@@ -9,12 +9,9 @@ AWS_S3_BUCKET_NAME=<your_bucket_name>
 AWS_S3_FOLDER_NAME=<random_string>
 ADMIN_SECRET=<random_string>
 JWT_SECRET=<random_string>
-PORT=8000
 POSTGRES_DB=<random_string>
 POSTGRES_USER=<random_string>
 POSTGRES_PASSWORD=<random_string>
-POSTGRES_PORT=<random_number_or_5432>
-POSTGRES_HOST=<random_string>
 ```
 
 Build docker images with command:
