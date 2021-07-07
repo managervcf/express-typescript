@@ -1,3 +1,4 @@
+export * from './enums/route.enum';
 export * from './enums/user-roles.enum';
 
 export * from './interfaces/recipe.interface';

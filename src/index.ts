@@ -6,6 +6,7 @@ import { createConnection } from 'typeorm';
 import { apiRouter } from './routes';
 import { config } from './config';
 import { seedDb } from './utils';
+import { Route } from './types';
 
 /**
  * Check environment variables.
@@ -40,7 +41,7 @@ app.use(
 /**
  * Use routers.
  */
-app.use('/api', apiRouter);
+app.use(Route.Api, apiRouter);
 
 /**
  * Function that initializes the application.
