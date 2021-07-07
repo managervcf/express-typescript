@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { sign, verify } from 'jsonwebtoken';
 import { config } from '../config';
 import { recipeRepository } from '../repositories';
-import { ICurrentUser, IToken, UserRoles } from '../types';
+import { ICurrentUser, IToken, Route, UserRoles } from '../types';
 
 /**
  * Creates an authentication token.
@@ -50,21 +50,25 @@ export async function isAuthorized(
 
   if (!user) {
     return res.send({ message: 'Not authorized' });
-  } else if (UserRoles.Admin) {
+  } else if (user.role === UserRoles.Admin) {
     return next();
   }
 
-  const foundRecipe = await recipeRepository.getRecipe(Number(req.params.id));
+  if (req.baseUrl.includes(Route.Recipes)) {
+    const foundRecipe = await recipeRepository.getRecipe(+req.params.id);
 
-  if (!foundRecipe) {
-    return res.send({ message: 'Recipe not found' });
+    if (!foundRecipe) {
+      return res.send({ message: 'Recipe not found' });
+    }
+
+    if (foundRecipe.user.email !== user.email) {
+      return res.send({ message: 'Not a recipe owner' });
+    }
+
+    return next();
+  } else {
+    return res.send({ message: 'Not an admin' });
   }
-
-  if (foundRecipe.user.email !== user.email) {
-    return res.send({ message: 'Not a recipe owner' });
-  }
-
-  return next();
 }
 
 /**
