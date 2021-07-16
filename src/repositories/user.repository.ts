@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import { config } from '../config';
 import { User } from '../entities';
-import { ICreateUserDto, UserRoles } from '../types';
+import { ErrorMessage, ICreateUserDto, UserRoles } from '../types';
 
 export class UserRepository {
   /**
@@ -37,7 +37,7 @@ export class UserRepository {
       console.dir(savedUser, { depth: Infinity, colors: true });
     } catch (error) {
       console.log(error);
-      throw new Error('User cannot be created');
+      throw new Error(ErrorMessage.UserNotCreated);
     }
 
     return savedUser;

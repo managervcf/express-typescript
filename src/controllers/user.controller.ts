@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { User } from '../entities';
 import { UserService, userService } from '../services';
+import { ResponseMessage } from '../types';
 
 class UserController {
   constructor(private userService: UserService) {}
@@ -26,7 +27,7 @@ class UserController {
     const user = await this.userService.getUser(req.params.id);
 
     if (!user) {
-      return res.status(404).send({ message: 'No user found' });
+      return res.status(404).send({ message: ResponseMessage.UserNotFound });
     }
 
     return res.send(user);

@@ -1,6 +1,10 @@
 import { Body, Post, Route, Tags } from 'tsoa';
 import { config } from '../config';
-import { IGetUploadUrlResult, IGetPresignedUrlArgs } from '../types';
+import {
+  IGetUploadUrlResult,
+  IGetPresignedUrlArgs,
+  ErrorMessage,
+} from '../types';
 import { getUploadUrl } from '../utils';
 
 @Route('/api/upload')
@@ -11,10 +15,10 @@ export class UploadService {
     @Body() { type, size }: IGetPresignedUrlArgs
   ): Promise<IGetUploadUrlResult> {
     if (!type || !size) {
-      throw new Error('Must upload a file');
+      throw new Error(ErrorMessage.NoUploadFile);
     }
     if (!type.match(/image\/jpeg/gi)) {
-      throw new Error('File type must be of image/jpeg');
+      throw new Error(ErrorMessage.NotAnImage);
     }
     if (size > config.maxImageSize || size <= 0) {
       throw new Error(

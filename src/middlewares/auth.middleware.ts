@@ -2,7 +2,13 @@ import { Request, Response, NextFunction } from 'express';
 import { sign, verify } from 'jsonwebtoken';
 import { config } from '../config';
 import { recipeRepository } from '../repositories';
-import { ICurrentUser, IToken, Route, UserRoles } from '../types';
+import {
+  ICurrentUser,
+  IToken,
+  ResponseMessage,
+  Route,
+  UserRoles,
+} from '../types';
 
 /**
  * Creates an authentication token.
@@ -36,7 +42,7 @@ export async function isAuthorized(
   next: NextFunction
 ) {
   if (!req.headers.authorization) {
-    return res.send({ message: 'Not authenticated' });
+    return res.send({ message: ResponseMessage.NotAuthenticated });
   }
 
   const token = req.headers.authorization;
@@ -45,11 +51,11 @@ export async function isAuthorized(
   try {
     user = verifyToken(token);
   } catch (error) {
-    return res.send({ message: 'Invalid token' });
+    return res.send({ message: ResponseMessage.InvalidToken });
   }
 
   if (!user) {
-    return res.send({ message: 'Not authorized' });
+    return res.send({ message: ResponseMessage.NotAuthorized });
   } else if (user.role === UserRoles.Admin) {
     return next();
   }
@@ -58,16 +64,16 @@ export async function isAuthorized(
     const foundRecipe = await recipeRepository.getRecipe(+req.params.id);
 
     if (!foundRecipe) {
-      return res.send({ message: 'Recipe not found' });
+      return res.send({ message: ResponseMessage.RecipeNotFound });
     }
 
     if (foundRecipe.user.email !== user.email) {
-      return res.send({ message: 'Not a recipe owner' });
+      return res.send({ message: ResponseMessage.NotRecipeOwner });
     }
 
     return next();
   } else {
-    return res.send({ message: 'Not an admin' });
+    return res.send({ message: ResponseMessage.NotAdmin });
   }
 }
 
@@ -84,7 +90,7 @@ export function isAuthenticated(
   next: NextFunction
 ) {
   if (!req.headers.authorization) {
-    return res.send({ message: 'Not authenticated' });
+    return res.send({ message: ResponseMessage.NotAuthenticated });
   }
 
   const token = req.headers.authorization;
@@ -93,11 +99,11 @@ export function isAuthenticated(
   try {
     user = verifyToken(token);
   } catch (error) {
-    return res.send({ message: 'Invalid token' });
+    return res.send({ message: ResponseMessage.InvalidToken });
   }
 
   if (!user) {
-    return res.send({ message: 'Not authenticated' });
+    return res.send({ message: ResponseMessage.NotAuthenticated });
   } else {
     req.body.currentUser = user;
     return next();
