@@ -1,18 +1,6 @@
 import { FieldType, StringType } from 'body-validator';
 import { ConnectionOptions } from 'typeorm';
-import { IValidationSchema } from '../types';
-
-enum EnvironmentVariables {
-  ADMIN_SECRET = 'ADMIN_SECRET',
-  AWS_S3_ACCESS_KEY_ID = 'AWS_S3_ACCESS_KEY_ID',
-  AWS_S3_BUCKET_NAME = 'AWS_S3_BUCKET_NAME',
-  AWS_S3_FOLDER_NAME = 'AWS_S3_FOLDER_NAME',
-  AWS_S3_SECRET_ACCESS_KEY = 'AWS_S3_SECRET_ACCESS_KEY',
-  JWT_SECRET = 'JWT_SECRET',
-  POSTGRES_DB = 'POSTGRES_DB',
-  POSTGRES_USER = 'POSTGRES_USER',
-  POSTGRES_PASSWORD = 'POSTGRES_PASSWORD',
-}
+import { EnvironmentVariables, IValidationSchema } from '../types';
 
 /**
  * A config class that contains all the configuration options
