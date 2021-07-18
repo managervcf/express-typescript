@@ -8,19 +8,14 @@ import { EnvironmentVariables, IValidationSchema } from '../types';
  */
 class Config {
   /**
-   * List of all required environment variables.
-   */
-  readonly envVariables = EnvironmentVariables;
-
-  /**
    * Checks the presence of evironment variables.
    */
   public checkEnvVariables(): void {
     let missing: string[] = [];
     console.log('Checking environment variables:');
-    console.dir(Object.values(this.envVariables), { colors: true });
+    console.dir(Object.values(EnvironmentVariables), { colors: true });
 
-    for (let variable in this.envVariables) {
+    for (let variable in EnvironmentVariables) {
       if (!process.env[variable]) {
         missing = [...missing, variable];
       }
@@ -37,16 +32,17 @@ class Config {
    * AWS S3 config options and keys.
    */
   readonly awsS3 = {
-    bucketName: process.env[this.envVariables.AWS_S3_BUCKET_NAME]!,
-    folderName: process.env[this.envVariables.AWS_S3_FOLDER_NAME]!,
-    accessKeyId: process.env[this.envVariables.AWS_S3_ACCESS_KEY_ID]!,
-    secretAccessKey: process.env[this.envVariables.AWS_S3_SECRET_ACCESS_KEY]!,
+    bucketName: process.env[EnvironmentVariables.AWS_S3_BUCKET_NAME]!,
+    folderName: process.env[EnvironmentVariables.AWS_S3_FOLDER_NAME]!,
+    accessKeyId: process.env[EnvironmentVariables.AWS_S3_ACCESS_KEY_ID]!,
+    secretAccessKey:
+      process.env[EnvironmentVariables.AWS_S3_SECRET_ACCESS_KEY]!,
   };
 
   /**
    * Secret string for registering an admin.
    */
-  readonly adminSecret = process.env[this.envVariables.ADMIN_SECRET]!;
+  readonly adminSecret = process.env[EnvironmentVariables.ADMIN_SECRET]!;
 
   /**
    * Maximum uploaded image size. Value in bytes.
@@ -62,7 +58,7 @@ class Config {
    * JsonWebToken options.
    */
   readonly jwt = {
-    secret: process.env[this.envVariables.JWT_SECRET]!,
+    secret: process.env[EnvironmentVariables.JWT_SECRET]!,
     expiryTime: '1h',
   };
 
@@ -78,9 +74,9 @@ class Config {
     type: 'postgres',
     host: 'db',
     port: 5432,
-    username: process.env[this.envVariables.POSTGRES_USER]!,
-    password: process.env[this.envVariables.POSTGRES_PASSWORD]!,
-    database: process.env[this.envVariables.POSTGRES_DB]!,
+    username: process.env[EnvironmentVariables.POSTGRES_USER]!,
+    password: process.env[EnvironmentVariables.POSTGRES_PASSWORD]!,
+    database: process.env[EnvironmentVariables.POSTGRES_DB]!,
     synchronize: true,
     entities: ['src/entities/**/*.ts'],
   };
