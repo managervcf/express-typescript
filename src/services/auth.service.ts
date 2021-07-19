@@ -11,9 +11,7 @@ export class AuthService {
   constructor(private userRepository: UserRepository) {}
 
   @Post('/register')
-  public async registerUser(
-    @Body() createUserDto: ICreateUserDto
-  ): Promise<IToken> {
+  async registerUser(@Body() createUserDto: ICreateUserDto): Promise<IToken> {
     const { id, email, role } = await this.userRepository.createUser(
       createUserDto
     );
@@ -24,7 +22,7 @@ export class AuthService {
   }
 
   @Post('/login')
-  public async loginUser(
+  async loginUser(
     @Body() { email, password }: ILoginUserDto
   ): Promise<IToken | null> {
     const foundUser = await this.userRepository.getUserByEmail(email, true);
@@ -47,9 +45,7 @@ export class AuthService {
   }
 
   @Get('/currentuser')
-  public async getCurrentUser(
-    @Header() token: string
-  ): Promise<ICurrentUser | null> {
+  async getCurrentUser(@Header() token: string): Promise<ICurrentUser | null> {
     let currentUser: ICurrentUser | null = null;
 
     try {

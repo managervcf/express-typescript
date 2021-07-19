@@ -9,7 +9,7 @@ class UserController {
   /**
    * Retrieves all users.
    */
-  public getUsers = async (
+  getUsers = async (
     _req: Request,
     res: Response
   ): Promise<Response<User[]>> => {
@@ -20,7 +20,7 @@ class UserController {
   /**
    * Retrieves a specific user.
    */
-  public getUser = async (
+  getUser = async (
     req: Request,
     res: Response
   ): Promise<Response<User | null>> => {

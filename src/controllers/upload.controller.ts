@@ -8,7 +8,7 @@ class UploadController {
   /**
    * Generates a presigned url required for a file upload to AWS S3.
    */
-  public getPresignedUrl = async (
+  getPresignedUrl = async (
     req: Request,
     res: Response
   ): Promise<Response<IGetUploadUrlResult>> => {

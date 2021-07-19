@@ -9,19 +9,17 @@ export class UserService {
   constructor(private userRepository: UserRepository) {}
 
   @Get('/')
-  public async getUsers(): Promise<User[]> {
+  async getUsers(): Promise<User[]> {
     return this.userRepository.getUsers();
   }
 
   @Post('/')
-  public async createUser(
-    @Body() createUserDto: ICreateUserDto
-  ): Promise<User> {
+  async createUser(@Body() createUserDto: ICreateUserDto): Promise<User> {
     return this.userRepository.createUser(createUserDto);
   }
 
   @Get('/:id')
-  public async getUser(@Path() id: string): Promise<User | null> {
+  async getUser(@Path() id: string): Promise<User | null> {
     return this.userRepository.getUser(Number(id));
   }
 }

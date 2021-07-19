@@ -9,12 +9,12 @@ export class RecipeService {
   constructor(private recipeRepository: RecipeRepository) {}
 
   @Get('/')
-  public async getRecipes(): Promise<Recipe[]> {
+  async getRecipes(): Promise<Recipe[]> {
     return this.recipeRepository.getRecipes();
   }
 
   @Post('/')
-  public async createRecipe(
+  async createRecipe(
     @Body()
     {
       createRecipeDto,
@@ -28,12 +28,12 @@ export class RecipeService {
   }
 
   @Get('/:id')
-  public async getRecipe(@Path() id: string): Promise<Recipe | null> {
+  async getRecipe(@Path() id: string): Promise<Recipe | null> {
     return this.recipeRepository.getRecipe(Number(id));
   }
 
   @Patch('/:id')
-  public async updateRecipe(
+  async updateRecipe(
     @Path() id: string,
     @Body() updateRecipeDto: IUpdateRecipeDto
   ): Promise<Recipe | null> {
@@ -41,7 +41,7 @@ export class RecipeService {
   }
 
   @Delete('/:id')
-  public async deleteRecipe(
+  async deleteRecipe(
     @Path() id: string,
     @Body() userId: string
   ): Promise<boolean> {

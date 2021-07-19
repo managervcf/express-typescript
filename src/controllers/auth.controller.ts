@@ -8,7 +8,7 @@ class AuthController {
   /**
    * Registers a user.
    */
-  public registerUser = async (
+  registerUser = async (
     req: Request,
     res: Response
   ): Promise<Response<IToken>> => {
@@ -19,7 +19,7 @@ class AuthController {
   /**
    * Logs in a user.
    */
-  public loginUser = async (
+  loginUser = async (
     req: Request,
     res: Response
   ): Promise<Response<IToken>> => {
@@ -30,7 +30,7 @@ class AuthController {
   /**
    * Checks if there is a currently logged in user.
    */
-  public getCurrentUser = async (
+  getCurrentUser = async (
     req: Request,
     res: Response
   ): Promise<Response<ICurrentUser | null>> => {

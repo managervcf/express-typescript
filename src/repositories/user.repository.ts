@@ -7,7 +7,7 @@ export class UserRepository {
   /**
    * Retrieves all users.
    */
-  public async getUsers(): Promise<User[]> {
+  async getUsers(): Promise<User[]> {
     const users = await getRepository(User).find();
     console.dir('Found all users ------>', { colors: true });
     console.dir(users, { depth: Infinity, colors: true });
@@ -18,7 +18,7 @@ export class UserRepository {
   /**
    * Creates a new user.
    */
-  public async createUser({
+  async createUser({
     email,
     password,
     adminSecret,
@@ -46,7 +46,7 @@ export class UserRepository {
   /**
    * Retrieves a user by id.
    */
-  public async getUser(id: number): Promise<User | null> {
+  async getUser(id: number): Promise<User | null> {
     const user = await getRepository(User).findOne({ id });
     console.dir(`Found user by id '${id}' ------>`, { colors: true });
     console.dir(user, { depth: Infinity, colors: true });
@@ -57,7 +57,7 @@ export class UserRepository {
   /**
    * Retrieves a user by email. Password field is excluded by default.
    */
-  public async getUserByEmail(
+  async getUserByEmail(
     email: string,
     includePassword?: boolean
   ): Promise<User | null> {

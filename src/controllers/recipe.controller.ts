@@ -8,7 +8,7 @@ class RecipeController {
   /**
    * Retrieves all recipes.
    */
-  public getRecipes = async (
+  getRecipes = async (
     _req: Request,
     res: Response
   ): Promise<Response<Recipe[]>> => {
@@ -19,7 +19,7 @@ class RecipeController {
   /**
    * Creates a recipe.
    */
-  public createRecipe = async (
+  createRecipe = async (
     req: Request,
     res: Response
   ): Promise<Response<Recipe>> => {
@@ -34,7 +34,7 @@ class RecipeController {
   /**
    * Retrieves a specific recipe.
    */
-  public getRecipe = async (
+  getRecipe = async (
     req: Request,
     res: Response
   ): Promise<Response<Recipe | null>> => {
@@ -50,7 +50,7 @@ class RecipeController {
   /**
    * Updates a specific recipe.
    */
-  public updateRecipe = async (
+  updateRecipe = async (
     req: Request,
     res: Response
   ): Promise<Response<Recipe | null>> => {
@@ -69,7 +69,7 @@ class RecipeController {
   /**
    * Deletes a specific recipe.
    */
-  public deleteRecipe = async (
+  deleteRecipe = async (
     req: Request,
     res: Response
   ): Promise<Response<boolean>> => {

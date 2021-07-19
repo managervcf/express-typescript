@@ -10,7 +10,7 @@ class Config {
   /**
    * Checks the presence of evironment variables.
    */
-  public checkEnvVariables(): void {
+  checkEnvVariables(): void {
     let missing: string[] = [];
     console.log('Checking environment variables:');
     console.dir(Object.values(EnvironmentVariables), { colors: true });

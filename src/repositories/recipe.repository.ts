@@ -6,7 +6,7 @@ export class RecipeRepository {
   /**
    * Retrieves all recipes.
    */
-  public async getRecipes(): Promise<Recipe[]> {
+  async getRecipes(): Promise<Recipe[]> {
     const foundRecipes = await getRepository(Recipe).find();
     console.dir('All recipes ------>', { colors: true });
     console.dir(foundRecipes, { depth: Infinity, colors: true });
@@ -17,7 +17,7 @@ export class RecipeRepository {
   /**
    * Creates a new recipe.
    */
-  public async createRecipe(
+  async createRecipe(
     {
       name,
       description,
@@ -62,7 +62,7 @@ export class RecipeRepository {
   /**
    * Retrieves a recipe by id.
    */
-  public async getRecipe(id: number): Promise<Recipe | null> {
+  async getRecipe(id: number): Promise<Recipe | null> {
     const foundRecipe = await getRepository(Recipe).findOne({ id });
     console.dir(`Found recipe with id: '${id}' ------>`, { colors: true });
     console.dir(foundRecipe, { depth: Infinity, colors: true });
@@ -73,7 +73,7 @@ export class RecipeRepository {
   /**
    * Updates a recipe by id.
    */
-  public async updateRecipe(
+  async updateRecipe(
     id: number,
     {
       name,
@@ -113,7 +113,7 @@ export class RecipeRepository {
   /**
    * Deletes a recipe and connected recipe ingredients.
    */
-  public async deleteRecipe(id: number, userId: number): Promise<boolean> {
+  async deleteRecipe(id: number, userId: number): Promise<boolean> {
     const deletedResult = await getRepository(Recipe).delete({
       id,
       user: { id: userId },

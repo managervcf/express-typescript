@@ -11,7 +11,7 @@ import { getUploadUrl } from '../utils';
 @Tags('Upload')
 export class UploadService {
   @Post('/')
-  public async getPresignedUrl(
+  async getPresignedUrl(
     @Body() { type, size }: IGetPresignedUrlArgs
   ): Promise<IGetUploadUrlResult> {
     if (!type || !size) {

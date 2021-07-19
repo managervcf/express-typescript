@@ -36,13 +36,11 @@ export class User {
   })
   recipes!: Recipe[];
 
-  public hashPassword(): void {
+  hashPassword(): void {
     this.password = hashSync(this.password, config.saltRounds);
   }
 
-  public checkIfUnencryptedPasswordIsValid(
-    unencryptedPassword: string
-  ): boolean {
+  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean {
     return compareSync(unencryptedPassword, this.password);
   }
 }
