@@ -1,4 +1,8 @@
-# Development
+# express-typescript
+
+Boilerplate API built with Express and written in TypeScript.
+
+## Development
 
 To run the app in the development mode, you need to create the `.env` in the root folder and provide:
 
@@ -28,11 +32,11 @@ Run docker containers with command:
 
 The application will be exposed to http://localhost:8000 unless otherwise specified.
 
-## API docs
+### API docs
 
 Swagger library was used to generate an API documentation at http://localhost:8000/docs.
 
-## Database seeding
+### Database seeding
 
 To stop seeding the database, set the first argument inside the `start` function to `true`:
 
